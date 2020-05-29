@@ -1,0 +1,35 @@
+<?php
+/**
+ * Package  Common.php
+ * Author:  joe@xxtime.com
+ * Date:    2015-07-20
+ * Time:    上午12:43
+ * Link:    http://www.xxtime.com
+ */
+
+if (!function_exists('dd')) {
+    function dd()
+    {
+        echo "<meta charset='UTF-8'><pre style='padding:20px; background: #000000; color: #FFFFFF;'>\r\n";
+        if (func_num_args()) {
+            foreach (func_get_args() as $k => $v) {
+                echo "------- Debug $k -------<br/>\r\n";
+                print_r($v);
+                echo "<br/>\r\n";
+            }
+        }
+        echo '</pre>';
+        exit;
+    }
+}
+
+if (!function_exists('writeLog')) {
+    function writeLog($log = '', $file = 'logs.txt')
+    {
+        $log_file = APP_DIR . '/logs/' . $file;
+        $handle = fopen($log_file, "a+b");
+        $text = date('Y-m-d H:i:s O') . ' ' . $log . "\r\n";
+        fwrite($handle, $text);
+        fclose($handle);
+    }
+}
